@@ -129,7 +129,12 @@ public class ColorFunctions implements FunctionsPackage {
       return input;
 
     Function function = FUNCTIONS.get(input.getName());
-    return function.evaluate(parameters, problemsHandler);
+    Expression result = function.evaluate(parameters, problemsHandler);
+    if (result != null) {
+      return result;
+    } else {
+      return input;
+    }
   }
 
 }
