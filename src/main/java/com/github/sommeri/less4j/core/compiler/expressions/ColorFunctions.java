@@ -171,6 +171,11 @@ class RGB extends AbstractColorFunction {
     return 3;
   }
 
+  @Override
+  protected String getName() {
+    return ColorFunctions.RGB;
+  }
+
 }
 
 class RGBA extends AbstractColorFunction {
@@ -200,6 +205,11 @@ class RGBA extends AbstractColorFunction {
     return 4;
   }
 
+  @Override
+  protected String getName() {
+    return ColorFunctions.RGBA;
+  }
+
 }
 
 class HSL extends AbstractColorFunction {
@@ -226,6 +236,11 @@ class HSL extends AbstractColorFunction {
   @Override
   protected int getMaxParameters() {
     return 3;
+  }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.HSL;
   }
 
 }
@@ -257,6 +272,11 @@ class HSLA extends AbstractColorFunction {
     return 4;
   }
 
+  @Override
+  protected String getName() {
+    return ColorFunctions.HSLA;
+  }
+
 }
 
 class HSV extends AbstractColorFunction {
@@ -283,6 +303,11 @@ class HSV extends AbstractColorFunction {
   @Override
   protected int getMaxParameters() {
     return 3;
+  }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.HSV;
   }
 
 }
@@ -314,6 +339,11 @@ class HSVA extends AbstractColorFunction {
     return 4;
   }
 
+  @Override
+  protected String getName() {
+    return ColorFunctions.HSVA;
+  }
+
 }
 
 class ARGB extends AbstractColorFunction {
@@ -338,6 +368,11 @@ class ARGB extends AbstractColorFunction {
     return validateParameter(parameter, ASTCssNodeType.COLOR_EXPRESSION, problemsHandler);
   }
 
+  @Override
+  protected String getName() {
+    return ColorFunctions.ARGB;
+  }
+
 }
 
 class Hue extends AbstractColorOperationFunction {
@@ -346,6 +381,11 @@ class Hue extends AbstractColorOperationFunction {
   protected Expression evaluate(ColorExpression color, ProblemsHandler problemsHandler, HiddenTokenAwareTree token) {
     HSLAValue hsla = toHSLA(color);
     return new NumberExpression(token, Double.valueOf(Math.round(hsla.h)), "", null, Dimension.NUMBER);
+  }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.HUE;
   }
 
 }
@@ -358,6 +398,11 @@ class Saturation extends AbstractColorOperationFunction {
     return new NumberExpression(token, Double.valueOf(Math.round(hsla.s * 100)), "%", null, Dimension.PERCENTAGE);
   }
 
+  @Override
+  protected String getName() {
+    return ColorFunctions.SATURATION;
+  }
+
 }
 
 class Lightness extends AbstractColorOperationFunction {
@@ -366,6 +411,11 @@ class Lightness extends AbstractColorOperationFunction {
   protected Expression evaluate(ColorExpression color, ProblemsHandler problemsHandler, HiddenTokenAwareTree token) {
     HSLAValue hsla = toHSLA(color);
     return new NumberExpression(token, Double.valueOf(Math.round(hsla.l * 100)), "%", null, Dimension.PERCENTAGE);
+  }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.LIGHTNESS;
   }
 
 }
@@ -377,6 +427,11 @@ class Red extends AbstractColorOperationFunction {
     return new NumberExpression(token, Double.valueOf(color.getRed()), "", null, Dimension.NUMBER);
   }
 
+  @Override
+  protected String getName() {
+    return ColorFunctions.RED;
+  }
+
 }
 
 class Green extends AbstractColorOperationFunction {
@@ -384,6 +439,11 @@ class Green extends AbstractColorOperationFunction {
   @Override
   protected Expression evaluate(ColorExpression color, ProblemsHandler problemsHandler, HiddenTokenAwareTree token) {
     return new NumberExpression(token, Double.valueOf(color.getGreen()), "", null, Dimension.NUMBER);
+  }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.GREEN;
   }
 
 }
@@ -395,6 +455,11 @@ class Blue extends AbstractColorOperationFunction {
     return new NumberExpression(token, Double.valueOf(color.getBlue()), "", null, Dimension.NUMBER);
   }
 
+  @Override
+  protected String getName() {
+    return ColorFunctions.BLUE;
+  }
+
 }
 
 class Alpha extends AbstractColorOperationFunction {
@@ -402,6 +467,11 @@ class Alpha extends AbstractColorOperationFunction {
   @Override
   protected Expression evaluate(ColorExpression color, ProblemsHandler problemsHandler, HiddenTokenAwareTree token) {
     return new NumberExpression(token, Double.valueOf(color.getAlpha()), "", null, Dimension.NUMBER);
+  }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.ALPHA;
   }
 
 }
@@ -415,6 +485,11 @@ class Luma extends AbstractColorOperationFunction {
             * color.getAlpha() * 100));
 
     return new NumberExpression(token, Double.valueOf(luma), "%", null, Dimension.PERCENTAGE);
+  }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.LUMA;
   }
 
 }
@@ -453,6 +528,11 @@ class Saturate extends AbstractColorHSLAmountFunction {
     hsla.s = clamp(hsla.s);
   }
 
+  @Override
+  protected String getName() {
+    return ColorFunctions.SATURATE;
+  }
+
 }
 
 class Desaturate extends AbstractColorHSLAmountFunction {
@@ -461,6 +541,11 @@ class Desaturate extends AbstractColorHSLAmountFunction {
   protected void apply(NumberExpression amount, HSLAValue hsla) {
     hsla.s -= amount.getValueAsDouble() / 100.0f;
     hsla.s = clamp(hsla.s);
+  }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.DESATURATE;
   }
 
 }
@@ -473,6 +558,11 @@ class Lighten extends AbstractColorHSLAmountFunction {
     hsla.l = clamp(hsla.l);
   }
 
+  @Override
+  protected String getName() {
+    return ColorFunctions.LIGHTEN;
+  }
+
 }
 
 class Darken extends AbstractColorHSLAmountFunction {
@@ -481,6 +571,11 @@ class Darken extends AbstractColorHSLAmountFunction {
   protected void apply(NumberExpression amount, HSLAValue hsla) {
     hsla.l -= amount.getValueAsDouble() / 100.0f;
     hsla.l = clamp(hsla.l);
+  }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.DARKEN;
   }
 
 }
@@ -493,6 +588,11 @@ class FadeIn extends AbstractColorHSLAmountFunction {
     hsla.a = clamp(hsla.a);
   }
 
+  @Override
+  protected String getName() {
+    return ColorFunctions.FADEIN;
+  }
+
 }
 
 class FadeOut extends AbstractColorHSLAmountFunction {
@@ -501,6 +601,11 @@ class FadeOut extends AbstractColorHSLAmountFunction {
   protected void apply(NumberExpression amount, HSLAValue hsla) {
     hsla.a -= amount.getValueAsDouble() / 100.0f;
     hsla.a = clamp(hsla.a);
+  }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.FADEOUT;
   }
 
 }
@@ -513,6 +618,11 @@ class Fade extends AbstractColorHSLAmountFunction {
     hsla.a = clamp(hsla.a);
   }
 
+  @Override
+  protected String getName() {
+    return ColorFunctions.FADE;
+  }
+
 }
 
 class Spin extends AbstractColorHSLAmountFunction {
@@ -521,6 +631,11 @@ class Spin extends AbstractColorHSLAmountFunction {
   protected void apply(NumberExpression amount, HSLAValue hsla) {
     double hue = ((hsla.h + amount.getValueAsDouble()) % 360);
     hsla.h = hue < 0 ? 360 + hue : hue;
+  }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.SPIN;
   }
 
 }
@@ -566,6 +681,11 @@ class Mix extends AbstractColorFunction {
     return false;
   }
 
+  @Override
+  protected String getName() {
+    return ColorFunctions.MIX;
+  }
+
 }
 
 class Greyscale extends AbstractColorOperationFunction {
@@ -576,6 +696,11 @@ class Greyscale extends AbstractColorOperationFunction {
     hsla.s = 0;
     return hsla(hsla, token);
   }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.GREYSCALE;
+  }
   
 }
 
@@ -583,6 +708,14 @@ class Contrast extends AbstractMultiParameterFunction {
 
   @Override
   protected Expression evaluate(List<Expression> splitParameters, ProblemsHandler problemsHandler, HiddenTokenAwareTree token) {
+    /* Contrast needs to support an invalid first parameter to succeed in less.js test cases.
+     * I think this is in order to support filter: rules so may not be a good idea.
+     * We return null to ColorFunctions which will in turn return the input, so in effect we change
+     * nothing.
+     */
+    if (splitParameters.get(0).getType() != ASTCssNodeType.COLOR_EXPRESSION)
+      return null;
+    
     ColorExpression color = (ColorExpression) splitParameters.get(0);
     ColorExpression dark = (ColorExpression) (splitParameters.size() > 1 ? splitParameters.get(1) : new ColorExpression(token, 0, 0, 0));
     ColorExpression light = (ColorExpression) (splitParameters.size() > 2 ? splitParameters.get(2) : new ColorExpression(token, 255, 255, 255));
@@ -610,7 +743,10 @@ class Contrast extends AbstractMultiParameterFunction {
   protected boolean validateParameter(Expression parameter, int position, ProblemsHandler problemsHandler) {
     switch (position) {
     case 0:
-      return (parameter.getType() == ASTCssNodeType.COLOR_EXPRESSION);
+      /* Contrast needs to support an invalid first parameter to succeed in less.js test cases.
+       * I think this is in order to support filter: rules so may not be a good idea.
+       */
+      return true;
     case 1:
     case 2:
       return validateParameter(parameter, ASTCssNodeType.COLOR_EXPRESSION, problemsHandler);
@@ -618,6 +754,11 @@ class Contrast extends AbstractMultiParameterFunction {
       return validateParameter(parameter, ASTCssNodeType.NUMBER, problemsHandler);
     }
     return false;
+  }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.CONTRAST;
   }
   
 }
@@ -629,6 +770,11 @@ class Multiply extends AbstractSimpleColorBlendFunction {
     return a * b / 255.0;
   }
 
+  @Override
+  protected String getName() {
+    return ColorFunctions.MULTIPLY;
+  }
+
 }
 
 class Screen extends AbstractSimpleColorBlendFunction {
@@ -638,6 +784,11 @@ class Screen extends AbstractSimpleColorBlendFunction {
     return 255 - (255 - a) * (255 - b) / 255;
   }
 
+  @Override
+  protected String getName() {
+    return ColorFunctions.SCREEN;
+  }
+
 }
 
 class Overlay extends AbstractSimpleColorBlendFunction {
@@ -645,6 +796,11 @@ class Overlay extends AbstractSimpleColorBlendFunction {
   @Override
   protected double evaluate(double a, double b) {
     return a < 128 ? 2 * a * b / 255 : 255 - 2 * (255 - a) * (255 - b) / 255;
+  }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.OVERLAY;
   }
 
 }
@@ -657,6 +813,11 @@ class Softlight extends AbstractSimpleColorBlendFunction {
     return t + a * (255 - (255 - a) * (255 - b) / 255 - t) / 255;
   }
 
+  @Override
+  protected String getName() {
+    return ColorFunctions.SOFTLIGHT;
+  }
+
 }
 
 class Hardlight extends AbstractSimpleColorBlendFunction {
@@ -664,6 +825,11 @@ class Hardlight extends AbstractSimpleColorBlendFunction {
   @Override
   protected double evaluate(double a, double b) {
     return b < 128 ? 2 * b * a / 255 : 255 - 2 * (255 - b) * (255 - a) / 255;
+  }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.HARDLIGHT;
   }
 
 }
@@ -675,6 +841,11 @@ class Difference extends AbstractSimpleColorBlendFunction {
     return Math.abs(a - b);
   }
 
+  @Override
+  protected String getName() {
+    return ColorFunctions.DIFFERENCE;
+  }
+
 }
 
 class Exclusion extends AbstractSimpleColorBlendFunction {
@@ -682,6 +853,11 @@ class Exclusion extends AbstractSimpleColorBlendFunction {
   @Override
   protected double evaluate(double a, double b) {
     return a + b * (255 - a - a) / 255;
+  }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.EXCLUSION;
   }
 
 }
@@ -693,6 +869,11 @@ class Average extends AbstractSimpleColorBlendFunction {
     return (a + b) / 2;
   }
 
+  @Override
+  protected String getName() {
+    return ColorFunctions.AVERAGE;
+  }
+
 }
 
 class Negation extends AbstractSimpleColorBlendFunction {
@@ -700,6 +881,11 @@ class Negation extends AbstractSimpleColorBlendFunction {
   @Override
   protected double evaluate(double a, double b) {
     return 255 - Math.abs(255 - b - a);
+  }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.NEGATION;
   }
 
 }
@@ -710,6 +896,11 @@ class Tint extends AbstractColorAmountFunction {
   protected Expression evaluate(ColorExpression color, NumberExpression amount, HiddenTokenAwareTree token) {
     return mix(rgb(255, 255, 255, token), color, amount, token);
   }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.TINT;
+  }
   
 }
 
@@ -718,6 +909,11 @@ class Shade extends AbstractColorAmountFunction {
   @Override
   protected Expression evaluate(ColorExpression color, NumberExpression amount, HiddenTokenAwareTree token) {
     return mix(rgb(0, 0, 0, token), color, amount, token);
+  }
+
+  @Override
+  protected String getName() {
+    return ColorFunctions.SHADE;
   }
   
 }
