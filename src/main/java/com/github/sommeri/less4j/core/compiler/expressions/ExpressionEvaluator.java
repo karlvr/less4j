@@ -62,6 +62,7 @@ public class ExpressionEvaluator {
     functions.add(new StringFunctions(problemsHandler));
     functions.add(new ColorFunctions(problemsHandler));
     functions.add(new MiscFunctions(problemsHandler));
+    functions.add(new TypeFunctions(problemsHandler));
     functions.add(new UnknownFunctions(problemsHandler));
   }
 
@@ -175,6 +176,7 @@ public class ExpressionEvaluator {
     case COLOR_EXPRESSION:
     case NUMBER:
     case FAULTY_EXPRESSION:
+    case EMPTY_EXPRESSION:
       return input;
 
     default:
